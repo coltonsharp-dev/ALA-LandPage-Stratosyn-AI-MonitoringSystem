@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Timebar Rail + Focus Planning Drawer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div data-nr-ui>
+
+    <div class="notch-rail" id="notchRail" role="region" aria-label="Timebar rail">
+      <button class="nr-handle" id="nrHandle" aria-label="Open focus planning" aria-expanded="false">
+        <div class="tb-rail" aria-hidden="true">
+          <div class="tb-nowIcon" id="tbNowIcon">
+            <img id="tbNowImg" alt="Current period" />
+          </div>
+
+          <div class="tb-timeLine" id="tbTime" aria-label="Current time"></div>
+
+          <div class="tb-divider" aria-hidden="true"></div>
+
+          <div class="tb-digits tb-mins" id="tbMinsLeft" aria-label="Minutes until next"></div>
+
+          <div class="tb-nextIcon" id="tbNextIcon">
+            <img id="tbNextImg" alt="Next period" />
+          </div>
+
+          <!-- Focus modes live INSIDE the rail (icon-only; rail is narrow) -->
+          <div class="fp-actions" id="fpActions" aria-label="Focus modes"></div>
+        </div>
+      </button>
+    </div>
+
+    <aside class="nr-drawer" id="nrDrawer" aria-label="Focus planning panel" aria-hidden="true">
+      <div class="nr-drawer-surface" role="dialog" aria-modal="false">
+        <div class="nr-drawer-head">
+          <div class="nr-drawer-title">
+            <span class="nr-dot" aria-hidden="true"></span>
+            <span>Focus Planning</span>
+          </div>
+
+          <div class="nr-drawer-actions">
+            <button class="nr-chip" type="button" data-action="pin" aria-pressed="false" title="Pin panel open">Pin</button>
+            <button class="nr-chip" type="button" data-action="top">Top</button>
+            <button class="nr-chip nr-chip-close" type="button" data-action="close" aria-label="Close panel">Close</button>
+          </div>
+        </div>
+
+        <div class="nr-drawer-body">
+          <section class="nr-section">
+
+            <!-- Calendar iframe (accent border follows --nr-accent) -->
+            <iframe
+              class="nr-cal"
+              src="https://calendar.google.com/calendar/embed?src=c_b33e0d1eb3c4b3402a31b1b9081db34c545607d8ca02886e021d63abd30dcbc0%40group.calendar.google.com&ctz=America%2FPhoenix&bgcolor=%23070A12"
+              frameborder="0"
+              scrolling="no"
+              loading="lazy"
+            ></iframe>
+
+            <h3 class="nr-h3">Controls</h3>
+
+            <div class="nr-grid">
+              <label class="nr-field">
+                <span class="nr-label">Lunch</span>
+                <select id="selLunch" class="nr-select">
+                  <option value="A">A Lunch</option>
+                  <option value="B">B Lunch</option>
+                </select>
+              </label>
+
+              <label class="nr-field">
+                <span class="nr-label">Day Type</span>
+                <select id="selDayType" class="nr-select">
+                  <option value="full">Full Day</option>
+                  <option value="early1pm">Half Day (1pm)</option>
+                  <option value="homeroom2">Homeroom Day</option>
+                  <option value="testing_tue_67">Testing Tue (6th–7th Finals)</option>
+                  <option value="testing_wed_345">Testing Wed (3rd–5th Finals)</option>
+                  <option value="testing_thu_12">Testing Thu (1st–2nd Finals)</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="nr-field nr-field-wide">
+              <span class="nr-label">Time Override (minutes)</span>
+              <div class="nr-rangeRow">
+                <input id="rngOverride" class="nr-range" type="range" min="-900" max="900" step="1" value="0" />
+                <div class="nr-rangeVal" id="lblOverride">0</div>
+              </div>
+              <p class="nr-hint">Starts at 0 every refresh. Slide to simulate time ahead/behind.</p>
+            </label>
+
+            <div class="nr-jumps" id="nrJumps" aria-label="Jump to period"></div>
+          </section>
+
+          <section class="nr-section">
+            <h3 class="nr-h3">Schedule Preview</h3>
+            <div class="nr-schedule" id="nrSchedule"></div>
+          </section>
+
+          <section class="nr-section">
+            <h3 class="nr-h3">Icon Reference</h3>
+            <div class="nr-iconGrid" id="nrIconGallery"></div>
+          </section>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
